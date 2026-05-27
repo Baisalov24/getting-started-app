@@ -2,19 +2,10 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker compose build'
+        stage('Deploy Application') {
+            steps {    
+                sh 'docker compose up -d --build --remove-orphans'
             }
         }
-
-        stage('Restart Containers') {
-            steps {
-                sh 'docker compose down'
-                sh 'docker compose up -d'
-            }
-        }
-
     }
 }
